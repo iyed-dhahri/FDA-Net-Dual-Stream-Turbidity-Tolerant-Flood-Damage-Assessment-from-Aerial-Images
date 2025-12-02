@@ -1,2 +1,43 @@
 FDA-Net: Dual-Stream Turbidity-Tolerant Flood Damage Assessment from Aerial Images.
 In case the article accepted, we will provide the link to the github without anonymization.
+
+# Building Segmentation in Aerial Imagery using YOLOv8
+
+This repository contains the implementation and evaluation code for the research article: **"[FDA-Net: Dual-Stream Turbidity-Tolerant Flood Damage Assessment from Aerial Images.]"**.
+
+## 📌 Overview
+This project focuses on the automatic segmentation of building footprints in aerial imagery, addressing the challenges posed by varying camera angles (oblique vs. near-nadir). We utilize fine-tuned variants of the YOLOv8 architecture (Nano, Small, and Medium) to achieve efficient and accurate building detection.
+
+## 🚀 Proposed Approach
+
+The proposed method utilizes a fine-tuned YOLOv8-Seg model to process high-quality imagery. The pipeline handles both **near-nadir** (top-down) and **oblique** (angled) perspectives effectively.
+
+![Proposed Approach Diagram](path/to/your/approach_diagram.png)
+*Figure 1: Overview of the proposed segmentation pipeline. The input aerial image is processed by the specific YOLOv8 encoder-decoder architecture to generate pixel-wise building masks.*
+
+## 📊 Experimental Results
+
+We evaluated three model variants (`n`, `s`, `m`) on the dataset. The quantitative results indicate that the **YOLOv8s-seg** model provides the best balance between accuracy and computational efficiency.
+
+### Quantitative Performance
+
+| Model | Variant | mAP50 |
+| :--- | :--- | :--- |
+| **YOLOv8n-Seg** | Nano | 0.628 |
+| **YOLOv8s-Seg** | Small | **0.651** |
+| **YOLOv8m-Seg** | Medium | 0.613 |
+
+### Qualitative Results
+
+Below are examples of the segmentation performance on test images with different viewing angles.
+
+| Oblique Perspective | Near-Nadir Perspective |
+| :---: | :---: |
+| ![Oblique Result](path/to/oblique_result.jpg) | ![Nadir Result](path/to/nadir_result.jpg) |
+| *Figure 2: Oblique aerial view* | *Figure 3: Near-nadir aerial view* |
+
+## 💻 Usage
+
+### Installation
+```bash
+pip install ultralytics ultralyticsplus
