@@ -1,86 +1,71 @@
-<div align="center">
+# 🏙️ YOLOv8 Building Segmentation
 
-# 🏙️ Building Segmentation in Aerial Imagery
-### Robust Detection for Oblique and Near-Nadir Perspectives
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue?logo=python&logoColor=white)
+![YOLOv8](https://img.shields.io/badge/YOLO-v8-green?logo=ultralytics)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0-EE4C2C?logo=pytorch&logoColor=white)
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![YOLOv8](https://img.shields.io/badge/YOLO-v8-green?logo=ultralytics)](https://github.com/ultralytics/ultralytics)
-[![Framework](https://img.shields.io/badge/PyTorch-Deep%20Learning-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-[**Read the Paper**](LINK_TO_PAPER) | [**View Demo**](LINK_TO_DEMO) | [**HuggingFace Models**](https://huggingface.co/keremberke)
+> **Robust automatic building footprint extraction for both oblique and near-nadir aerial imagery.**
 
 ---
 
-<p align="center">
-  <img src="path/to/your/teaser_image.jpg" alt="Teaser Result" width="80%">
-  <br>
-  <i>Automatic building footprint extraction across varying capture angles.</i>
-</p>
-
-</div>
-
-## 📖 Overview
-
-This repository houses the official implementation for the research article **"[Insert Your Paper Title Here]"**. 
-
-Aerial imagery often presents a challenge: buildings look different when viewed from directly above (**Nadir**) versus from an angle (**Oblique**). Our work addresses this by leveraging fine-tuned **YOLOv8** architectures to create a robust segmentation pipeline that maintains high accuracy regardless of the viewing angle.
-
-### ✨ Key Features
-* **Angle Robustness:** distinctive performance on both top-down and angled imagery.
-* **Efficiency:** Optimization of the YOLOv8-Seg architecture for speed/accuracy trade-offs.
-* **Plug-and-Play:** Simple inference pipeline using standard weights.
+## 📑 Table of Contents
+* [Overview](#-overview)
+* [Proposed Approach](#-proposed-approach)
+* [Performance](#-performance)
+* [Visual Results](#-visual-results)
+* [Quick Start](#-quick-start)
+* [Citation](#-citation)
 
 ---
 
-## ⚙️ Proposed Approach
+## 📌 Overview
 
-Our methodology utilizes a modified encoder-decoder structure based on YOLOv8. The network is trained to generalize the concept of "building" across different perspective distortions.
+This repository contains the official implementation of the paper **"[Insert Your Paper Title]"**.
 
-<div align="center">
-  <img src="path/to/your/approach_diagram.png" alt="Proposed Architecture" width="90%">
-</div>
+Standard aerial segmentation models often fail when buildings are viewed from an angle (**oblique**) rather than directly from above (**nadir**). This project solves that problem by fine-tuning YOLOv8 architecture to recognize building "concepts" regardless of the camera perspective.
 
----
-
-## 📊 Experimental Results
-
-We conducted extensive testing on the BIS dataset. The **Small (s)** variant of YOLOv8 proved to be the optimal choice, outperforming both the Nano and Medium variants in mAP50.
-
-### 1. Quantitative Performance
-| Model Variant | Parameters | mAP50 | Inference Speed |
-| :--- | :---: | :---: | :---: |
-| 🚀 YOLOv8n-Seg (Nano) | ~3.2M | 0.628 | Fastest |
-| ⚖️ **YOLOv8s-Seg (Small)** | **~11.2M** | **0.651** | **Balanced** |
-| 🧠 YOLOv8m-Seg (Medium) | ~25.9M | 0.613 | Slower |
-
-### 2. Visual Results
-
-<table align="center">
-  <tr>
-    <td align="center" width="50%">
-      <img src="path/to/oblique_result.jpg" alt="Oblique View" width="100%">
-      <br>
-      <b>Figure A: Oblique Perspective</b><br>
-      <i>Successful segmentation of building facades and roofs.</i>
-    </td>
-    <td align="center" width="50%">
-      <img src="path/to/nadir_result.jpg" alt="Nadir View" width="100%">
-      <br>
-      <b>Figure B: Near-Nadir Perspective</b><br>
-      <i>Precise footprint extraction in top-down views.</i>
-    </td>
-  </tr>
-</table>
+### Key Features
+* ✅ **Perspective Robustness:** Handles high off-nadir angles.
+* ✅ **Lightweight:** Runs on standard hardware (no heavy GPU required for inference).
+* ✅ **High Precision:** Optimized for distinct building boundaries.
 
 ---
 
-## 💻 Quick Start
+## 🚀 Proposed Approach
 
-### Installation
+We utilize a modified **YOLOv8-Seg** architecture. The model treats building segmentation as an instance segmentation task, allowing it to separate connected buildings effectively.
+
+**(Insert your pipeline diagram here)**
+`![Approach Diagram](path/to/your/approach_diagram.png)`
+
+---
+
+## 📊 Performance
+
+We compared three model scales on the BIS dataset. The **Small (s)** variant offers the best trade-off between speed and accuracy.
+
+| Model Variant | Parameters | mAP@50 | Inference Speed |
+| :--- | :--- | :--- | :--- |
+| **YOLOv8n-Seg** (Nano) | 3.2M | 0.628 | ⚡ Very Fast |
+| **YOLOv8s-Seg** (Small) | 11.2M | **0.651** | ⚖️ **Balanced** |
+| **YOLOv8m-Seg** (Medium) | 25.9M | 0.613 | 🐢 Slower |
+
+---
+
+## 🖼️ Visual Results
+
+The model demonstrates robust detection across different viewing angles.
+
+| **Figure 1: Oblique Perspective** | **Figure 2: Near-Nadir Perspective** |
+| :---: | :---: |
+| `![Oblique View](path/to/oblique_result.jpg)` | `![Nadir View](path/to/nadir_result.jpg)` |
+| *Accurate segmentation of building facades.* | *Precise footprint extraction.* |
+
+---
+
+## ⚡ Quick Start
+
+### 1. Install Dependencies
 ```bash
-# Clone the repository
-git clone [https://github.com/yourusername/your-repo-name.git](https://github.com/yourusername/your-repo-name.git)
-
-# Install dependencies
 pip install ultralytics ultralyticsplus
