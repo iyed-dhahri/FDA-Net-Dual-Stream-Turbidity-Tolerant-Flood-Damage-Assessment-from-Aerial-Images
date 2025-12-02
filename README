@@ -1,71 +1,36 @@
-# 🏙️ YOLOv8 Building Segmentation
+# FDA-Net: Dual-Stream Turbidity-Tolerant Flood Damage Assessment from Aerial Images
 
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Python](https://img.shields.io/badge/python-3.8%2B-blue?logo=python&logoColor=white)
-![YOLOv8](https://img.shields.io/badge/YOLO-v8-green?logo=ultralytics)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0-EE4C2C?logo=pytorch&logoColor=white)
+## Overview
 
-> **Robust automatic building footprint extraction for both oblique and near-nadir aerial imagery.**
+In this work, we present our approach that adoptsan ensemble framework which integrates two complementary deep learning modules designed for distinct, yet synergistic, post-flood assessment tasks (see Figure 2). The first module performs building detection by
+using a YOLOv8 that is pretrained on Building Instance Segmentation (BIS) dataset of high-quality satellite images (transfer-learning). The second module estimates the spatial extent of flooding through a pixel-wise segmentation using a UNet model trained on the Flood Area Segmentation (FAS) dataset. The resulting framework, named FDA-Net, is applied to aerial flood imagery to generate predictions for both building detection and flooded regions. These generated features are subsequently combined and visualized on considered raw aerial images, yielding a regrouped representation that includes detected buildings alongside a pixel-level flood segmentation map.
 
----
 
-## 📑 Table of Contents
-* [Overview](#-overview)
-* [Proposed Approach](#-proposed-approach)
-* [Performance](#-performance)
-* [Visual Results](#-visual-results)
-* [Quick Start](#-quick-start)
-* [Citation](#-citation)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e0e8db2c-c4dc-4595-9f78-693602ed3bcf" width="45%" />
+  <img src="https://github.com/user-attachments/assets/a4ab7ba4-2915-4d62-8b32-45e024b91b2c" width="45%" />
+</p>
 
----
+### Results on Tenesse flood in May,2010.
+ **"This work is under review. The source code as well as the prepared datasets will be made available once the work evaluated."**
 
-## 📌 Overview
+## 📚 References
 
-This repository contains the official implementation of the paper **"[Insert Your Paper Title]"**.
+If you use or refer to this work, please cite:
 
-Standard aerial segmentation models often fail when buildings are viewed from an angle (**oblique**) rather than directly from above (**nadir**). This project solves that problem by fine-tuning YOLOv8 architecture to recognize building "concepts" regardless of the camera perspective.
+**Standard Format:**
 
-### Key Features
-* ✅ **Perspective Robustness:** Handles high off-nadir angles.
-* ✅ **Lightweight:** Runs on standard hardware (no heavy GPU required for inference).
-* ✅ **High Precision:** Optimized for distinct building boundaries.
+ D. Iyed, H. Karim, G. Mahmoud and L. Idoumghar
+"FDA-Net: Dual-Stream Turbidity-Tolerant Flood Damage Assessment from Aerial Images
+"  
+*Computer Vision Conference 2026*, Springer.
 
----
-
-## 🚀 Proposed Approach
-
-We utilize a modified **YOLOv8-Seg** architecture. The model treats building segmentation as an instance segmentation task, allowing it to separate connected buildings effectively.
-
-**(Insert your pipeline diagram here)**
-`![Approach Diagram](path/to/your/approach_diagram.png)`
-
----
-
-## 📊 Performance
-
-We compared three model scales on the BIS dataset. The **Small (s)** variant offers the best trade-off between speed and accuracy.
-
-| Model Variant | Parameters | mAP@50 | Inference Speed |
-| :--- | :--- | :--- | :--- |
-| **YOLOv8n-Seg** (Nano) | 3.2M | 0.628 | ⚡ Very Fast |
-| **YOLOv8s-Seg** (Small) | 11.2M | **0.651** | ⚖️ **Balanced** |
-| **YOLOv8m-Seg** (Medium) | 25.9M | 0.613 | 🐢 Slower |
-
----
-
-## 🖼️ Visual Results
-
-The model demonstrates robust detection across different viewing angles.
-
-| **Figure 1: Oblique Perspective** | **Figure 2: Near-Nadir Perspective** |
-| :---: | :---: |
-| `![Oblique View](path/to/oblique_result.jpg)` | `![Nadir View](path/to/nadir_result.jpg)` |
-| *Accurate segmentation of building facades.* | *Precise footprint extraction.* |
-
----
-
-## ⚡ Quick Start
-
-### 1. Install Dependencies
-```bash
-pip install ultralytics ultralyticsplus
+**BibTeX:**
+```bibtex
+@inproceedings{iyed2025flood,
+  author    = { D. Iyed, H. Karim, G. Mahmoud, AS. Parisenti et L. Idoumghar},
+  title     = {FDA-Net: Dual-Stream Turbidity-Tolerant Flood Damage Assessment from Aerial Images},
+  booktitle = {Proceedings of the Computer Vision Conference (CVC)},
+  year      = {2026},
+  publisher = {Springer}
+}
